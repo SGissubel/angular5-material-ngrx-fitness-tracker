@@ -9,13 +9,17 @@ import { StopTrainingComponent } from './stop-training.component';
   styleUrls: ['./current-training.component.css']
 })
 export class CurrentTrainingComponent implements OnInit {
-  
+  @Output() trainingExit = new EventEmitter<void>();
   progress = 0;
   timer: number;
 
   constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.startOrResumeTimer();
+  }
+
+  startOrResumeTimer() {
     this.timer = setInterval(() => {
       this.progress = this.progress + 5;
       if (this.progress >= 100) {
@@ -31,7 +35,11 @@ export class CurrentTrainingComponent implements OnInit {
     }});
 
     dialogRef.afterClosed().subscribe(result=> {
-      console.log(result);
+      if (result) {
+        this.trainingExit.emit();
+      } else {
+        this.startOrResumeTimer();
+      }
     })
   }
 
