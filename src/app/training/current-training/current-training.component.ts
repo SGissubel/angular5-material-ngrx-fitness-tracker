@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { StopTrainingComponent } from './stop-training.component';
@@ -9,6 +9,7 @@ import { StopTrainingComponent } from './stop-training.component';
   styleUrls: ['./current-training.component.css']
 })
 export class CurrentTrainingComponent implements OnInit {
+  
   progress = 0;
   timer: number;
 
